@@ -1,8 +1,9 @@
 import React from 'react'
 import Cookies from 'universal-cookie'
 import {ChannelList, useChatContext} from "stream-chat-react"
-import {ChannelSeacrch , TeamChannelList, TeamChannelPreviwe} from "./"
-import HospitalIcon from "../assets/icons8-hospital-100.png"
+import {ChannelSeacrch , TeamChannelList, TeamChannelPreviwe} from "./";
+import HospitalIcon from "../assets/icons8-hospital-100.png";
+import LogoutIcon from "../assets/logout.png";
 
 const SideBar = () => (
     <div className="channel-list__sidebar">
@@ -11,15 +12,28 @@ const SideBar = () => (
                 <img src={HospitalIcon} alt="Hospital" width="30"/>
             </div>
         </div>
+        <div className='channel-list__sidebar__icon2'>
+            <div className='icon1__inner'>
+                <img src={LogoutIcon} alt="Logout" width="30"/>
+            </div>
+        </div>
 
+    </div>
+)
+const CompanyHeader = () => (
+    <div className='channel-list__header'>
+        <p className='channel-list__header__text'>Medical Pager</p>
     </div>
 )
 
 function ChannelListContainer() {
   return (
-    <div>
-      ChannelListContainer
-    </div>
+    <>
+        <SideBar/>
+        <div className='channel-list__list__wrapper'>
+            <CompanyHeader/>
+        </div>
+    </>
   )
 }
 
