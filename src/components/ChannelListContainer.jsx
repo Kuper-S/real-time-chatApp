@@ -32,6 +32,23 @@ function ChannelListContainer() {
         <SideBar/>
         <div className='channel-list__list__wrapper'>
             <CompanyHeader/>
+            <ChannelSeacrch/>
+            <ChannelList 
+                filters={{}}
+                channelRenderFilterFn={()=>{}}
+                List={(listPorps)=> (
+                    <TeamChannelList
+                        {...listPorps}
+                        type ="team"
+                    />
+                )}
+                Preview={(previewProps) =>(
+                    <TeamChannelPreviwe 
+                        {...previewProps}
+                        type ="team"
+                    />
+                )}
+            />
         </div>
     </>
   )
