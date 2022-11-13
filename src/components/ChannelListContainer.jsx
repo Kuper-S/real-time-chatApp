@@ -1,7 +1,7 @@
 import React from 'react'
 import Cookies from 'universal-cookie'
 import {ChannelList, useChatContext} from "stream-chat-react"
-import {ChannelSeacrch , TeamChannelList, TeamChannelPreviwe} from "./";
+import {ChannelSeacrch , TeamChannelList, TeamChannelPreview} from "./";
 import HospitalIcon from "../assets/icons8-hospital-100.png";
 import LogoutIcon from "../assets/logout.png";
 
@@ -43,7 +43,7 @@ function ChannelListContainer() {
                     />
                 )}
                 Preview={(previewProps) =>(
-                    <TeamChannelPreviwe 
+                    <TeamChannelPreview 
                         {...previewProps}
                         type ="team"
                     />
