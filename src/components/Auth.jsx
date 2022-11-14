@@ -4,11 +4,25 @@ import axios from 'axios';
 
 import signinImage from '../assets/signup.jpg';
 
+
+// difinde initialState
+const initialState = {
+    fullName: '',
+    username: '',
+    password: '',
+    confirmPassword: '',
+    phoneNumber: '',
+    avatarURL: '',
+}
+
 function Auth() {
+    const [form, setForm] = useState(initialState);
     const [isSingUp, setIsSingUp] = useState(true)
 
-    function handleChange() {
+    function handleChange(e) {
+        setForm({...form,[e.target.name]: e.target.value})
 
+        console.log(form)
     }
 
     function switchMode() {
@@ -100,7 +114,11 @@ function Auth() {
                             </label>
                         </div>
                         )}
-                        
+                        <div className="auth__form-container_fields-content_button">
+                        <button>
+                            {isSingUp ? 'Sing Up' : "Sing In"}
+                        </button>
+                        </div>
                 </form>
                 <div className="auth__form-container_fields-account">
                         <p>
