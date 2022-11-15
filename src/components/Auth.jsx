@@ -4,6 +4,9 @@ import axios from 'axios';
 
 import signinImage from '../assets/signup.jpg';
 
+//add cookies to have the user data that we get from the submit function. 
+const cookies = new Cookies()
+
 
 // difinde initialState
 const initialState = {
@@ -22,9 +25,36 @@ function Auth() {
     function handleChange(e) {
         setForm({...form,[e.target.name]: e.target.value})
 
-        console.log(form)
     }
 
+    async function handleSubmit (e){
+        e.preventDefault();
+
+        const { username, password, phoneNumber, avatarURL } = form;
+
+        // req to server!
+        const URL = 'http://localhost:5000/auth';
+
+        //  this is the data we passing from the frontend to the server!!!
+        const { data: { token, userId, hashedPassword, fullName } } = await axios.post(`${URL}/${isSingUp ? 'signup' : 'login'}`, {
+            username, password, fullName: form.fullName, phoneNumber, avatarURL,
+        });
+
+        cookies.set('token',token);
+        cookies.set('username',username);
+        cookies.set('fullName',fullName);
+        cookies.set('userId',userId);
+
+        if(isSingUp){
+            cookies.set('phoneNumber',phoneNumber)
+            cookies.set('avatarURL',avatarURL)
+            cookies.set('hashedPassword',hashedPassword)
+        }
+        //  realod the app for the token.
+        window.location.reload();
+
+
+    }
     function switchMode() {
         setIsSingUp((prevIsSingup) => !prevIsSingup);
     }
@@ -33,7 +63,7 @@ function Auth() {
         <div className="auth__form-container_fields">
             <div className="auth__form-container_fields-content">
                 <p>{isSingUp ? 'Sing Up' : 'Sing In'}</p>
-                <form onSubmit={""}>
+                <form onSubmit={handleSubmit}>
                     {isSingUp && (
                         <div className="auth__form-container_fields-content_input">
                             <label htmlFor='fullName'>

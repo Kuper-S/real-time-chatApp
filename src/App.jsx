@@ -8,9 +8,23 @@ import "./App.css"
 // to set chat we need apiKey :
 const apiKey = "2wc9kd8ajn3d";
 
+const cookies = new Cookies();
+
+
+const authToken = cookies.get("token");
+
 const client = StreamChat.getInstance(apiKey);
 
-const authToken = false;
+if(authToken) {
+    client.connectUser({
+        id: cookies.get('userId'),
+        name: cookies.get('username'),
+        fullName: cookies.get('fullName'),
+        image: cookies.get('avatarURL'),
+        hashedPassword: cookies.get('hashedPassword'),
+        phoneNumber: cookies.get('phoneNumber'),
+    }, authToken)
+}
 
 function App() {
   if(!authToken) return <Auth/>
